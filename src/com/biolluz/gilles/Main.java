@@ -28,7 +28,7 @@ public class Main {
 
         // Initialization of the players
         Player player1 = new Player("player1", deck1);
-        Player player2 = new Player("player1", deck2);
+        Player player2 = new Player("player2", deck2);
 
         // Initialization of the board game
         ArrayList boardGame = new ArrayList();
