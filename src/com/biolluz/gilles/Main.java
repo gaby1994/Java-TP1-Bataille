@@ -9,25 +9,30 @@ public class Main {
     public static void main(String[] args){
 
         // Creation of cards pack
-        ArrayList cardsPack = new ArrayList();
-        for (int i = 1; i <= 4; i++) {
-            for (int j = 1; j<= 13; j++){
-                cardsPack.add(j);
+        ArrayList<Card> deck = new ArrayList<>();
+        for(int i = 0 ; i < Card.colors.length ; i++) {
+            for(int j = 0 ; j < Card.values.length; j++) {
+                Card tempCard = new Card(Card.colors[i], Card.values[j]);
+                deck.add(tempCard);
             }
         }
 
-        // Scuffle
-        Collections.shuffle(cardsPack);
+        // Shuffle
+        Collections.shuffle(deck);
 
         // Initialization of two decks of the same number of cards
-        ArrayList deck1 = new ArrayList();
-        ArrayList deck2 = new ArrayList();
+        ArrayList<Card> deck1 = new ArrayList<>();
+        ArrayList<Card> deck2 = new ArrayList<>();
         for (int i = 0; i <= 51; i=i+2){
-            deck1.add(cardsPack.get(i));
-            deck2.add(cardsPack.get(i+1));
+            deck1.add(deck.get(i));
+            deck2.add(deck.get(i+1));
         }
+        System.out.print ("deck1 : "+deck1+"\n");
+        System.out.print ("deck2 : "+deck2+"\n");
 
         // Initialization of the players
+        // Player player1 = new Player("player1", deck1);
+        // Player player2 = new Player("player2", deck2);
         String player1_first_name;
         System.out.print ("Player1 enter your first name:");
         Scanner user_input1 = new Scanner ( System.in );
@@ -38,20 +43,20 @@ public class Main {
         System.out.print ("Player2 enter your first name:");
         Scanner user_input2 = new Scanner ( System.in );
         player2_first_name = user_input2.next ();
-        Player player2 = new Player(player2_first_name, deck1);
+        Player player2 = new Player(player2_first_name, deck2);
 
         // Initialization of the board game
-        ArrayList boardGame = new ArrayList();
+        ArrayList<Card> boardGame = new ArrayList<>();
 
         // Battle
 
         while (player1.numberOfCards() != 0 && player2.numberOfCards() != 0){
-            int card1 = player1.takeACard();
-            int card2 = player2.takeACard();
+            Card card1 = player1.takeACard();
+            Card card2 = player2.takeACard();
             boardGame.add(card1);
             boardGame.add(card2);
-            if (card1 == card2) {
-                while (card1 == card2) {
+            if (card1.getValue() == card2.getValue()) {
+                while (card1.getValue() == card2.getValue()) {
                     boardGame.add(player1.takeACard());
                     boardGame.add(player2.takeACard());
                     card1 = player1.takeACard();
@@ -60,23 +65,31 @@ public class Main {
                     boardGame.add(card2);
                 }
             }
-            if (card1 > card2){
-                System.out.println(boardGame+" "+player1.getname()+" wins the round, there are "+player2.numberOfCards()+" cards left to his opponent");
+            if (card1.getValue() > card2.getValue()){
+                System.out.println(boardGame+" ====> "+player1.getname()+" wins the battle");
                 player1.PickUpTheCards(boardGame);
                 boardGame.removeAll(boardGame);
             } else {
-                System.out.println(boardGame+" "+player2.getname()+" wins the round, there are "+player1.numberOfCards()+" cards left to his opponent");
+                System.out.println(boardGame+" ====> "+player2.getname()+" wins, the battle");
                 player2.PickUpTheCards(boardGame);
                 boardGame.removeAll(boardGame);
             }
+
+            System.out.println("balance sheet : "+player1.getInfos());
+            System.out.println("balance sheet : "+player2.getInfos());
+            System.out.println("==============================================================================================================");
+
         }
 
         if (player1.numberOfCards() == 0) {
-            System.out.println(player2.getname()+" wins the game");
+            System.out.println(player2.getname()+" wins the war");
         }
         if (player2.numberOfCards() == 0) {
-            System.out.println(player1.getname()+" wins the game");
+            System.out.println(player1.getname()+" wins the war");
         }
+
+
+
 
     }
 
