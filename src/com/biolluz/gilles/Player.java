@@ -51,4 +51,6 @@ public class Player {
     public int numberOfCards (){
         return this.deck.size()+this.reserve.size();
     }
+
+    public String getname(){return this.name;}
 }

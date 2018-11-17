@@ -2,6 +2,7 @@ package com.biolluz.gilles;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class Main {
 
@@ -27,8 +28,17 @@ public class Main {
         }
 
         // Initialization of the players
-        Player player1 = new Player("player1", deck1);
-        Player player2 = new Player("player2", deck2);
+        String player1_first_name;
+        System.out.print ("Player1 enter your first name:");
+        Scanner user_input1 = new Scanner ( System.in );
+        player1_first_name = user_input1.next ();
+        Player player1 = new Player(player1_first_name, deck1);
+
+        String player2_first_name;
+        System.out.print ("Player2 enter your first name:");
+        Scanner user_input2 = new Scanner ( System.in );
+        player2_first_name = user_input2.next ();
+        Player player2 = new Player(player2_first_name, deck1);
 
         // Initialization of the board game
         ArrayList boardGame = new ArrayList();
@@ -51,21 +61,21 @@ public class Main {
                 }
             }
             if (card1 > card2){
-                System.out.println(boardGame+" Player1 wins the round, there are "+player2.numberOfCards()+" cards left to his opponent");
+                System.out.println(boardGame+" "+player1.getname()+" wins the round, there are "+player2.numberOfCards()+" cards left to his opponent");
                 player1.PickUpTheCards(boardGame);
                 boardGame.removeAll(boardGame);
             } else {
-                System.out.println(boardGame+" Player2 wins the round, there are "+player1.numberOfCards()+" cards left to his opponent");
+                System.out.println(boardGame+" "+player2.getname()+" wins the round, there are "+player1.numberOfCards()+" cards left to his opponent");
                 player2.PickUpTheCards(boardGame);
                 boardGame.removeAll(boardGame);
             }
         }
 
         if (player1.numberOfCards() == 0) {
-            System.out.println("Player2 wins the game");
+            System.out.println(player2.getname()+" wins the game");
         }
         if (player2.numberOfCards() == 0) {
-            System.out.println("Player1 wins the game");
+            System.out.println(player1.getname()+" wins the game");
         }
 
     }
