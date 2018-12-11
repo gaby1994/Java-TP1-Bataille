@@ -55,7 +55,8 @@ public class Main {
             Card card2 = player2.takeACard();
             boardGame.add(card1);
             boardGame.add(card2);
-            if (card1.getValue() == card2.getValue()) {
+            // if (card1.getValue() == card2.getValue()) {
+            if (card1.comparator(card2) == 2) {
                 while (card1.getValue() == card2.getValue()) {
                     boardGame.add(player1.takeACard());
                     boardGame.add(player2.takeACard());
@@ -65,7 +66,8 @@ public class Main {
                     boardGame.add(card2);
                 }
             }
-            if (card1.getValue() > card2.getValue()){
+            //if (card1.getValue() > card2.getValue()){
+            if (card1.comparator(card2) == 1){
                 System.out.println(boardGame+" ====> "+player1.getname()+" wins the battle");
                 player1.PickUpTheCards(boardGame);
                 boardGame.removeAll(boardGame);

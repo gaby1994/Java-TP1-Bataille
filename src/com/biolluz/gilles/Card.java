@@ -1,7 +1,7 @@
 package com.biolluz.gilles;
 
 public class Card {
-xsxs
+
     private String color;
     private int value;
     public static String[] colors = new String[] {"spade","heart","diamond","club"};
